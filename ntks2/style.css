@@ -1,0 +1,183 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: radial-gradient(circle at top, #1b2735, #090a0f);
+    font-family: system-ui, sans-serif;
+    color: white;
+    min-height: 250vh;
+    padding: 80px 0;
+}
+
+.title {
+    text-align: center;
+    font-size: 48px;
+    margin-bottom: 120px;
+    letter-spacing: 3px;
+}
+
+.gallery {
+    width: 90%;
+    max-width: 1400px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 60px;
+    perspective: 1400px;
+}
+
+.card {
+    position: relative;
+    height: 420px;
+    border-radius: 24px;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    box-shadow: 0 40px 80px rgba(0,0,0,.6);
+
+    animation: reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1s ease, filter 1s ease;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,.85),
+        transparent
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 30px;
+
+    transform: translateZ(60px);
+    opacity: 0;
+    transition: 0.8s ease;
+}
+
+.overlay h2 {
+    font-size: 26px;
+    margin-bottom: 8px;
+}
+
+.overlay p {
+    opacity: .8;
+}
+
+.card:hover {
+    transform: rotateX(12deg) rotateY(-12deg) scale(1.05);
+}
+
+.card:hover img {
+    transform: scale(1.15);
+    filter: brightness(.7) blur(2px);
+}
+
+.card:hover .overlay {
+    opacity: 1;
+}
+
+@keyframes reveal {
+    from {
+        opacity: 0;
+        transform:
+            translateY(120px)
+            rotateX(-25deg)
+            scale(.8);
+    }
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            rotateX(0)
+            scale(1);
+    }
+}
+/* LOVE SECTION */
+.love {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1200px;
+}
+
+/* Карточка */
+.love-card {
+    padding: 60px 80px;
+    border-radius: 30px;
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.08),
+        rgba(255,255,255,0.02)
+    );
+    backdrop-filter: blur(10px);
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.6),
+        inset 0 0 30px rgba(255,255,255,.05);
+
+    text-align: center;
+    transform-style: preserve-3d;
+
+    /* scroll animation */
+    animation: loveReveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+}
+
+/* Текст */
+.love-card p {
+    font-size: 32px;
+    line-height: 1.4;
+    font-weight: 300;
+    letter-spacing: 1px;
+    color: #fff;
+    text-shadow: 0 10px 30px rgba(0,0,0,.6);
+}
+
+/* Мягкий 3D при наведении */
+.love-card:hover {
+    transform: rotateX(10deg) rotateY(-10deg) scale(1.05);
+    transition: transform 0.8s ease;
+}
+
+/* Анимация появления */
+@keyframes loveReveal {
+    from {
+        opacity: 0;
+        transform:
+            translateY(120px)
+            rotateX(-30deg)
+            scale(.85);
+    }
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            rotateX(0)
+            scale(1);
+    }
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+    .love-card {
+        padding: 40px;
+    }
+
+    .love-card p {
+        font-size: 22px;
+    }
+}
